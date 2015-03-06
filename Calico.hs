@@ -153,7 +153,6 @@ module Calico (
   , Data.Foldable.for_
   , Data.Foldable.sequenceA_
   , Data.Foldable.asum
-  , Data.Foldable.concat
   , Data.Foldable.concatMap
   , Data.Foldable.and
   , Data.Foldable.or
@@ -233,13 +232,15 @@ module Calico (
 
     -- * I\/O
   , Calico.IO.IO
-  , Calico.IO.print
   , Calico.IO.getContents
   , Calico.IO.getLine
   , Calico.IO.putStr
   , Calico.IO.putStrLn
+  , Calico.IO.readLn
+  , Calico.IO.print
   , Calico.IO.readFile
   , Calico.IO.writeFile
+  , Calico.IO.appendFile
   ) where
 import qualified Prelude
 import qualified Control.Applicative
