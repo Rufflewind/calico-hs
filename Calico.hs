@@ -175,7 +175,7 @@ module Calico (
   , (Control.Category..)
 
     -- ** Functor
-  , Data.Functor.Functor
+  , Data.Functor.Functor(..)
   , (Data.Functor.<$>)
   , (Data.Functor.<$)
 #if MIN_VERSION_base(4, 7, 0)
