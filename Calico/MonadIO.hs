@@ -1,9 +1,10 @@
-{-# LANGUAGE CPP #-}
--- | This module is mutually exclusive with @Calico.MonadIO@.
-module Calico.IO (
+{-# LANGUAGE CPP, NoMonomorphismRestriction #-}
+-- | This module is mutually exclusive with @Calico.IO@.
+module Calico.MonadIO (
     -- * File I\/O
-    IO.IO
-  , IO.Handle
+    MonadIO(..)
+  , IO
+  , Handle
   , IO.FilePath
 
     -- ** Standard streams
@@ -13,7 +14,7 @@ module Calico.IO (
   , IO.isEOF
   , IO.getChar
   , IO.getContents
-  , IO.getLine
+  , getLine
   , IO.readIO
   , IO.readLn
   , IO.putChar
@@ -57,8 +58,6 @@ module Calico.IO (
   , hPutStrLn'
   , hPrint
   , hPrint'
-  , HPrintfType
-  , hPrintf
 
     -- ** Position
   , IO.hFileSize
@@ -105,15 +104,9 @@ module Calico.IO (
 #endif
   , getEnvironment
 
-    -- ** Exit
-  , ExitCode(..)
-  , exitWith
-  , exitFailure
-  , exitSuccess
-
     -- * I\/O errors
-  , IO.IOError
-  , IO.ioError
+  , IOError
+  , ioError
   , IO.userError
   , IO.mkIOError
   , IO.modifyIOError
@@ -157,39 +150,85 @@ module Calico.IO (
   ) where
 import Prelude ()
 import Calico.Base
-import System.IO (Handle, IO, hFlush, hPrint, hPutStr, hPutStrLn,
-                  print, putStr, putStrLn, stdout)
-import Text.Printf (HPrintfType, hPrintf)
-import System.Environment hiding (lookupEnv)
-import System.Exit
-import qualified System.Environment as Env
-import qualified System.IO as IO
-import qualified System.IO.Error as IO
+import Calico.IO (Handle, IO, IOError)
+import Control.Monad.IO.Class (MonadIO, liftIO)
+import qualified Calico.IO as IO
 
-putStr' :: String -> IO ()
-putStr' = (>> hFlush stdout) . putStr
+getLine :: MonadIO m => m String
+getLine = liftIO IO.getLine
 
-putStrLn' :: String -> IO ()
-putStrLn' = (>> hFlush stdout) . putStrLn
+putStr :: MonadIO m => String -> m ()
+putStr = liftIO . IO.putStr
 
-print' :: Show a => a -> IO ()
-print' = (>> hFlush stdout) . print
+putStr' :: MonadIO m => String -> m ()
+putStr' = liftIO . IO.putStr'
 
-hPutStr' :: Handle -> String -> IO ()
-hPutStr' h = (>> hFlush h) . hPutStr h
+putStrLn :: MonadIO m => String -> m ()
+putStrLn = liftIO . IO.putStrLn
 
-hPutStrLn' :: Handle -> String -> IO ()
-hPutStrLn' h = (>> hFlush h) . hPutStrLn h
+putStrLn' :: MonadIO m => String -> m ()
+putStrLn' = liftIO . IO.putStrLn'
 
-hPrint' :: Show a => Handle -> a -> IO ()
-hPrint' h = (>> hFlush h) . hPrint h
+print :: (MonadIO m, Show a) => a -> m ()
+print = liftIO . IO.print
 
-lookupEnv :: String -> IO (Maybe String)
+print' :: (MonadIO m, Show a) => a -> m ()
+print' = liftIO . IO.print'
+
+hPutStr :: MonadIO m => Handle -> String -> m ()
+hPutStr h = liftIO . IO.hPutStr h
+
+hPutStr' :: MonadIO m => Handle -> String -> m ()
+hPutStr' h = liftIO . IO.hPutStr' h
+
+hPutStrLn :: MonadIO m => Handle -> String -> m ()
+hPutStrLn h = liftIO . IO.hPutStrLn h
+
+hPutStrLn' :: MonadIO m => Handle -> String -> m ()
+hPutStrLn' h = liftIO . IO.hPutStrLn' h
+
+hPrint :: (MonadIO m, Show a) => Handle -> a -> m ()
+hPrint h = liftIO . IO.hPrint h
+
+hPrint' :: (MonadIO m, Show a) => Handle -> a -> m ()
+hPrint' h = liftIO . IO.hPrint' h
+
+hFlush :: MonadIO m => Handle -> m ()
+hFlush = liftIO . IO.hFlush
+
+getArgs :: MonadIO m => m [String]
+getArgs = liftIO IO.getArgs
+
+withArgs :: MonadIO m => [String] -> IO a -> m a
+withArgs = (liftIO .) . IO.withArgs
+
+getProgName :: MonadIO m => m String
+getProgName = liftIO IO.getProgName
+
+withProgName :: MonadIO m => String -> IO a -> m a
+withProgName = (liftIO .) . IO.withProgName
+
 #if MIN_VERSION_base(4, 6, 0)
-lookupEnv = Env.lookupEnv
-#else
-lookupEnv n = (Just <$> getEnv n)
-  `IO.catch` \ e -> if IO.isDoesNotExistError e
-                    then return Nothing
-                    else IO.ioError e
+getExecutablePath :: MonadIO m => m String
+getExecutablePath = liftIO IO.getExecutablePath
 #endif
+
+lookupEnv :: MonadIO m => String -> m (Maybe String)
+lookupEnv = liftIO . IO.lookupEnv
+
+getEnv :: MonadIO m => String -> m String
+getEnv = liftIO . IO.getEnv
+
+#if MIN_VERSION_base(4, 7, 0)
+setEnv :: MonadIO m => String -> String -> m ()
+setEnv = (liftIO .) . IO.setEnv
+
+unsetEnv :: MonadIO m => String -> m ()
+unsetEnv = liftIO . IO.unsetEnv
+#endif
+
+getEnvironment :: MonadIO m => m [(String, String)]
+getEnvironment = liftIO IO.getEnvironment
+
+ioError :: MonadIO m => IOError -> m a
+ioError = liftIO . ioError
