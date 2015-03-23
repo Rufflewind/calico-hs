@@ -5,6 +5,8 @@ module Calico.MonadIOControl (
   , MonadBaseControl(..)
 
     -- * Exceptions
+  , Exception
+  , SomeException
   , catch
   , catchIOError
   , try

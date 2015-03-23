@@ -4,6 +4,8 @@ module Calico.IOControl (
     module Calico.IO
 
     -- * Exceptions
+  , Exception
+  , SomeException
   , catch
   , catchIOError
   , try
