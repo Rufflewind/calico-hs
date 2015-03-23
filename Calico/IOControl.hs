@@ -6,8 +6,11 @@ module Calico.IOControl (
   , try
   , tryIOError
   , throwIO
+  , ThreadId
+  , forkIO
   ) where
 import Prelude ()
 import Calico.IO
+import Control.Concurrent
 import Control.Exception
 import System.IO.Error

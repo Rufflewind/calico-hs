@@ -8,10 +8,13 @@ module Calico.MonadIOControl (
   , try
   , tryIOError
   , throwIO
+  , ThreadId
+  , fork
   ) where
 import Prelude ()
 import Calico.Base
 import Calico.MonadIO
+import Control.Concurrent.Lifted
 import Control.Exception.Lifted
 import Control.Monad.Trans.Control (MonadBaseControl(..))
 
