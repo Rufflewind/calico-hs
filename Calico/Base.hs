@@ -150,6 +150,8 @@ module Calico.Base (
   , Data.Foldable.or
   , Data.Foldable.any
   , Data.Foldable.all
+  , sum'
+  , prod'
   , Data.Foldable.maximumBy
   , Data.Foldable.minimumBy
   , Data.Foldable.notElem
@@ -265,3 +267,13 @@ null = Data.Foldable.foldr (\_ _ -> Data.Bool.False) Data.Bool.True
 length :: Data.Foldable.Foldable t => t a -> Prelude.Int
 length = Data.Foldable.foldr (\_ x -> Prelude.succ x) 0
 #endif
+
+-- | Strict version of 'sum'.
+sum' :: (Data.Foldable.Foldable t, Prelude.Num a) =>
+         t a -> a
+sum' = Data.Foldable.foldl' (Prelude.+) 0
+
+-- | Strict version of 'prod'.
+prod' :: (Data.Foldable.Foldable t, Prelude.Num a) =>
+         t a -> a
+prod' = Data.Foldable.foldl' (Prelude.*) 1
