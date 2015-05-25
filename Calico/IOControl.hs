@@ -6,8 +6,11 @@ module Calico.IOControl (
     -- * Exceptions
   , Exception
   , SomeException
+  , bracket
   , catch
   , catchIOError
+  , mask
+  , onException
   , try
   , tryIOError
   , throwIO
