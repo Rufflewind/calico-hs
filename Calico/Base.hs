@@ -166,6 +166,8 @@ module Calico.Base (
   , Data.Traversable.forM
   , Data.Traversable.mapAccumL
   , Data.Traversable.mapAccumR
+  , Data.Traversable.fmapDefault
+  , Data.Traversable.foldMapDefault
 
     -- ** Category
   , Control.Category.id
