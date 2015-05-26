@@ -1,4 +1,7 @@
 {-# LANGUAGE CPP, NoMonomorphismRestriction #-}
+#ifndef MIN_VERSION_base
+#include "../dist/build/autogen/cabal_macros.h"
+#endif
 -- | This module is mutually exclusive with @Calico.IO@.
 module Calico.MonadIO (
     -- * File I\/O

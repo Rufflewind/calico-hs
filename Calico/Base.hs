@@ -1,4 +1,7 @@
 {-# LANGUAGE CPP #-}
+#ifndef MIN_VERSION_base
+#include "../dist/build/autogen/cabal_macros.h"
+#endif
 module Calico.Base (
 
     -- * Basic types
@@ -269,11 +272,9 @@ length = Data.Foldable.foldr (\_ x -> Prelude.succ x) 0
 #endif
 
 -- | Strict version of 'sum'.
-sum' :: (Data.Foldable.Foldable t, Prelude.Num a) =>
-         t a -> a
+sum' :: (Data.Foldable.Foldable t, Prelude.Num a) => t a -> a
 sum' = Data.Foldable.foldl' (Prelude.+) 0
 
 -- | Strict version of 'prod'.
-prod' :: (Data.Foldable.Foldable t, Prelude.Num a) =>
-         t a -> a
+prod' :: (Data.Foldable.Foldable t, Prelude.Num a) => t a -> a
 prod' = Data.Foldable.foldl' (Prelude.*) 1

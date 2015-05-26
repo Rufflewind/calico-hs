@@ -1,5 +1,8 @@
--- | This module is mutually exclusive with @Calico.IOControl@.
 {-# LANGUAGE CPP, FlexibleContexts #-}
+#ifndef MIN_VERSION_base
+#include "../dist/build/autogen/cabal_macros.h"
+#endif
+-- | This module is mutually exclusive with @Calico.IOControl@.
 module Calico.MonadIOControl (
     module Calico.MonadIO
   , MonadBaseControl(..)
