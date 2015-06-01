@@ -202,6 +202,9 @@ module Calico.Base (
   , Control.Monad.when
   , Control.Monad.unless
 
+    -- ** Typeable
+  , Data.Typeable.Typeable
+
     -- * Functions
 
     -- ** Tuples
@@ -248,6 +251,7 @@ import qualified Data.Ord
 import qualified Data.Ratio
 import qualified Data.String
 import qualified Data.Traversable
+import qualified Data.Typeable
 import qualified Data.Word
 import qualified Debug.Trace
 import qualified Data.Tuple
