@@ -10,6 +10,7 @@ module Calico.IOControl (
   , Exception
   , SomeException
   , bracket
+  , bracket_
   , catch
   , catchIOError
   , mask

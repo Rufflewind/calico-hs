@@ -11,6 +11,7 @@ module Calico.MonadIOControl (
   , Exception
   , SomeException
   , bracket
+  , bracket_
   , catch
   , catchIOError
   , mask
