@@ -202,6 +202,9 @@ module Calico.Base (
   , Control.Monad.when
   , Control.Monad.unless
 
+    -- ** Generic
+  , GHC.Generics.Generic
+
     -- ** Typeable
   , Data.Typeable.Typeable
 
@@ -253,8 +256,9 @@ import qualified Data.String
 import qualified Data.Traversable
 import qualified Data.Typeable
 import qualified Data.Word
-import qualified Debug.Trace
 import qualified Data.Tuple
+import qualified Debug.Trace
+import qualified GHC.Generics
 import qualified Text.Read
 import qualified Text.Show
 import qualified Text.Printf
