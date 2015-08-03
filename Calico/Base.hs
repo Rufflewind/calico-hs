@@ -233,6 +233,13 @@ module Calico.Base (
   , Debug.Trace.trace
   , Debug.Trace.traceShow
   , Debug.Trace.traceStack
+#if MIN_VERSION_base(4, 7, 0)
+  , Debug.Trace.traceId
+  , Debug.Trace.traceShowId
+#else
+  , traceId
+  , traceShowId
+#endif
 
   ) where
 import qualified Prelude
@@ -288,3 +295,11 @@ sum' = Data.Foldable.foldl' (Prelude.+) 0
 -- | Strict version of 'prod'.
 prod' :: (Data.Foldable.Foldable t, Prelude.Num a) => t a -> a
 prod' = Data.Foldable.foldl' (Prelude.*) 1
+
+#if !MIN_VERSION_base(4, 7, 0)
+traceId :: Show a => a -> a
+traceId a = Debug.Trace.trace a a
+
+traceShowId :: Show a => a -> a
+traceShowId a = Debug.Trace.traceShow a a
+#endif
