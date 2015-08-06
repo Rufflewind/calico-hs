@@ -208,6 +208,13 @@ module Calico.Base (
     -- ** Typeable
   , Data.Typeable.Typeable
 
+    -- ** Type-level programming
+#if MIN_VERSION_base(4, 7, 0)
+  , Data.Proxy.Proxy(Proxy)
+  , Data.Proxy.asProxyTypeOf
+  , Data.Proxy.KProxy(KProxy)
+#endif
+
     -- * Functions
 
     -- ** Tuples
@@ -258,6 +265,9 @@ import qualified Data.List
 import qualified Data.Maybe
 import qualified Data.Monoid
 import qualified Data.Ord
+#if MIN_VERSION_base(4, 7, 0)
+import qualified Data.Proxy
+#endif
 import qualified Data.Ratio
 import qualified Data.String
 import qualified Data.Traversable
