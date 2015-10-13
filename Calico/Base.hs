@@ -73,6 +73,11 @@ module Calico.Base (
   , Data.List.permutations
   , Data.List.zip
   , Data.List.zipWith
+#if MIN_VERSION_base(4, 8, 0)
+  , Data.List.uncons
+#else
+  , uncons
+#endif
   , Data.List.unzip
 
     -- ** String
@@ -312,4 +317,10 @@ traceId a = Debug.Trace.trace a a
 
 traceShowId :: Show a => a -> a
 traceShowId a = Debug.Trace.traceShow a a
+#endif
+
+#if !MIN_VERSION_base(4, 8, 0)
+uncons :: [a] -> Maybe (a, [a])
+uncons []       = Nothing
+uncons (x : xs) = Just (x, xs)
 #endif
