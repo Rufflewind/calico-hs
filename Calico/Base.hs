@@ -120,6 +120,7 @@ module Calico.Base (
   , Text.Read.reads
   , Text.Read.readParen
   , Text.Read.read
+  , maybeRead
   , Text.Read.lex
 
     -- ** Show
@@ -177,6 +178,10 @@ module Calico.Base (
     -- ** Category
   , Control.Category.id
   , (Control.Category..)
+
+    -- ** Arrow
+  , Control.Arrow.first
+  , Control.Arrow.second
 
     -- ** Functor
   , Data.Functor.Functor(..)
@@ -256,6 +261,7 @@ module Calico.Base (
   ) where
 import qualified Prelude
 import qualified Control.Applicative
+import qualified Control.Arrow
 import qualified Control.Category
 import qualified Control.Monad
 import qualified Data.Bool
@@ -284,6 +290,9 @@ import qualified GHC.Generics
 import qualified Text.Read
 import qualified Text.Show
 import qualified Text.Printf
+import Data.Maybe (Maybe(..))
+import Data.String (String)
+import Text.Read (Read, reads)
 
 #if !MIN_VERSION_base(4, 7, 0)
 infixl 4 $>
@@ -324,3 +333,9 @@ uncons :: [a] -> Maybe (a, [a])
 uncons []       = Nothing
 uncons (x : xs) = Just (x, xs)
 #endif
+
+maybeRead :: Read a => String -> Maybe a
+maybeRead s = do
+  case reads s of
+    [(x, "")] -> Just x
+    _         -> Nothing

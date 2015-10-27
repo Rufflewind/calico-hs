@@ -25,6 +25,7 @@ module Calico.MonadIOControl (
   , ThreadId
   , myThreadId
   , fork
+  , fork_
   , forkWithUnmask
   , forkFinally
   , killThread
@@ -88,3 +89,6 @@ forkFinally :: MonadBaseControl IO m =>
 forkFinally action finalAct = mask $ \ restore -> fork $
   try (restore action) >>= finalAct
 #endif
+
+fork_ :: MonadBaseControl IO m => m () -> m ()
+fork_ = void . fork
