@@ -29,6 +29,9 @@ library
                        -- transformers
                        Calico.MonadIO
 
+                       -- exceptions
+                       Calico.MonadException
+
                        -- lifted-base monad-control transformers
                        -- [FlexibleContexts]
                        Calico.MonadIOControl
@@ -52,6 +55,7 @@ library
                      , containers
                      , hashable
                      , text >=1.1 && <1.3
+                     , exceptions
                      , lifted-base
                      , monad-control
                      , transformers

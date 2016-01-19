@@ -2,7 +2,8 @@
 #ifndef MIN_VERSION_base
 #include "../dist/build/autogen/cabal_macros.h"
 #endif
--- | This module is mutually exclusive with @Calico.MonadIOControl@.
+-- | This module is mutually exclusive with @Calico.MonadException@ and
+-- @Calico.MonadIOControl@.
 module Calico.IOControl (
     module Calico.IO
 
