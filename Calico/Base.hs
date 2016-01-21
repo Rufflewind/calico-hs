@@ -198,12 +198,27 @@ module Calico.Base (
   , Data.Traversable.foldMapDefault
 
     -- ** Category
+  , Control.Category.Category
   , Control.Category.id
   , (Control.Category..)
+  , (Control.Category.<<<)
+  , (Control.Category.>>>)
 
     -- ** Arrow
+  , Control.Arrow.Arrow
+  , Control.Arrow.arr
   , Control.Arrow.first
   , Control.Arrow.second
+  , (Control.Arrow.***)
+  , (Control.Arrow.&&&)
+  , Control.Arrow.returnA
+  , (Control.Arrow.^>>)
+  , (Control.Arrow.>>^)
+  , Control.Arrow.ArrowChoice
+  , Control.Arrow.left
+  , Control.Arrow.right
+  , (Control.Arrow.+++)
+  , (Control.Arrow.|||)
 
     -- ** Functor
   , Data.Functor.Functor(..)
