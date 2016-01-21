@@ -112,6 +112,25 @@ module Calico.Base (
   , Prelude.fromIntegral
   , Prelude.realToFrac
 
+    -- ** Bits
+  , Data.Bits.Bits
+  , (Data.Bits..&.)
+  , (Data.Bits..|.)
+  , Data.Bits.xor
+  , Data.Bits.complement
+  , Data.Bits.shift
+  , Data.Bits.rotate
+  , Data.Bits.bit
+  , Data.Bits.setBit
+  , Data.Bits.clearBit
+  , Data.Bits.complementBit
+  , Data.Bits.testBit
+  , Data.Bits.isSigned
+  , Data.Bits.shiftL
+  , Data.Bits.shiftR
+  , Data.Bits.rotateL
+  , Data.Bits.rotateR
+
     -- ** Read
   , Text.Read.ReadS
   , Text.Read.Read
@@ -264,6 +283,7 @@ import qualified Control.Applicative
 import qualified Control.Arrow
 import qualified Control.Category
 import qualified Control.Monad
+import qualified Data.Bits
 import qualified Data.Bool
 import qualified Data.Char
 import qualified Data.Complex
