@@ -29,6 +29,9 @@ module Calico.Base (
   , Data.Bool.otherwise
 
     -- ** Numeric types
+#if MIN_VERSION_base(4, 8, 0)
+  , Numeric.Natural.Natural
+#endif
   , Prelude.Integer
   , Prelude.Int
   , Prelude.Rational
@@ -307,6 +310,9 @@ import qualified Data.Word
 import qualified Data.Tuple
 import qualified Debug.Trace
 import qualified GHC.Generics
+#if MIN_VERSION_base(4, 8, 0)
+import qualified Numeric.Natural (Natural)
+#endif
 import qualified Text.Read
 import qualified Text.Show
 import qualified Text.Printf
