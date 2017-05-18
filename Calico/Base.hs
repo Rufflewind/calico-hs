@@ -85,6 +85,7 @@ module Calico.Base (
 
     -- ** String
   , Data.String.String
+  , Data.String.IsString
   , Text.Printf.printf
   , Text.Printf.PrintfType
 
